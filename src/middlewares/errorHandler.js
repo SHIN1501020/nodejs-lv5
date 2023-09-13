@@ -1,15 +1,14 @@
 import { Message } from "../constants/index.js";
 import { CustomError } from "../utils/errors/CustomError.js";
 /**
- * 
+ *
  * @function
- * @param {Error} error - 발생한 에러 객체 
+ * @param {Error} error - 발생한 에러 객체
  * @param {object} req  - 요청 객체
  * @param {object} res - 응답 객체
  * @param {function} next - next 미들웨어 함수
  * @returns {json} - 에러 메시지
  */
-
 export const errorHandler = (err, req, res, next) => {
   // console.log(error)
   if (err instanceof CustomError) {

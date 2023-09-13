@@ -14,49 +14,25 @@ import ValidSchema from "../utils/joi/index.js";
 import { CommentsController } from "../controllers/comments.js";
 
 const router = express.Router();
-const commentsController = new CommentsController()
+const commentsController = new CommentsController();
 
 /**
  * 댓글 생성 API - POST '/posts/:postId/comments'
- *
- * @async
- * @function
- * @param {object} req - 요청 객체
- * @param {object} res - 응답 객체
- * @param {function} next - next 미들웨어 함수
  */
 router.post("/:postId/comments", authMiddleware, validateBody(ValidSchema.comment), commentsController.createComment);
 
 /**
  * 댓글 조회 API - GET '/posts/:postId/comments'
- *
- * @async
- * @function
- * @param {object} req - 요청 객체
- * @param {object} res - 응답 객체
- * @param {function} next - next 미들웨어 함수
  */
 router.get("/:postId/comments", commentsController.getComments);
 
 /**
  * 댓글 수정 API - GET '/posts/:postId/:commentId'
- *
- * @async
- * @function
- * @param {object} req - 요청 객체
- * @param {object} res - 응답 객체
- * @param {function} next - next 미들웨어 함수
  */
 router.put("/:postId/comments/:commentId", authMiddleware, validateBody(ValidSchema.comment), commentsController.updateComment);
 
 /**
  * 댓글 삭제 API - DELETE '/posts/:postId/:commentId'
- *
- * @async
- * @function
- * @param {object} req - 요청 객체
- * @param {object} res - 응답 객체
- * @param {function} next - next 미들웨어 함수
  */
 router.delete("/:postId/comments/:commentId", authMiddleware, commentsController.deleteComment);
 

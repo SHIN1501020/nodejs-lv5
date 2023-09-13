@@ -14,8 +14,14 @@ import { LikesController } from "../controllers/likes.js";
 const router = express.Router();
 const likesController = new LikesController();
 
-router.post('/:postId/like', authMiddleware, likesController.setLike);
+/**
+ * 좋아요 API - POST '/posts/:postId/like'
+ */
+router.post("/:postId/like", authMiddleware, likesController.setLike);
 
-router.get('/like', authMiddleware, likesController.getLikes);
+/**
+ * 좋아요 조회 API - GET '/posts/like'
+ */
+router.get("/like", authMiddleware, likesController.getLikes);
 
 export default router;

@@ -18,22 +18,11 @@ const usersController = new UsersController();
 
 /**
  * 회원가입 API - POST '/signup'
- *
- * @async
- * @param {object} req - 요청 객체
- * @param {object} res - 응답 객체
- * @param {function} next - next 미들웨어 함수
  */
 router.post("/signup", validateBody(ValidSchema.signup), usersController.signup);
 
 /**
  * 로그인 API - POST '/login'
- *
- * @async
- * @function
- * @param {object} req - 요청 객체
- * @param {object} res - 응답 객체
- * @param {function} next - next 미들웨어 함수
  */
 router.post("/login", usersController.login);
 

@@ -64,7 +64,7 @@ model Comments {
 }
 
 model Likes {
-  likeId    String      @id @default(uuid()) @map("likeId")
+  likeId    String      @id @default(uuid()) @map("id")
   createdAt DateTime    @default(now()) @map("createdAt")
   updatedAt DateTime    @updatedAt @map("updatedAt")
 

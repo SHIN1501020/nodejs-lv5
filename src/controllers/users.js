@@ -1,9 +1,10 @@
 import { asyncHandler } from "../middlewares/asyncHandler.js";
-import { UsersService } from "../services/users.js";
 import { Message } from "../constants/index.js";
 
 export class UsersController {
-  usersService = new UsersService();
+  constructor(usersService){
+    this.usersService = usersService;
+  }
 
   signup = asyncHandler(async (req, res, next) => {
     const { nickname, password, confirm } = req.body;

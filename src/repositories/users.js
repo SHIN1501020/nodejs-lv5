@@ -1,6 +1,8 @@
-import { prisma } from "../utils/prisma/index.js";
-
 export class UsersRepository {
+  constructor(prisma){
+    this.prisma = prisma;
+  }
+
   findUser = async (nickname) => {
     return await prisma.users.findFirst({
       where: { nickname },

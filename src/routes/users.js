@@ -11,10 +11,16 @@ import express from "express";
 import { validateBody } from "../middlewares/validation.js";
 import ValidSchema from "../utils/joi/index.js";
 
+import { prisma } from "../utils/prisma/index.js";
+import { UsersRepository } from "../repositories/users.js"
+import { UsersService } from "../services/users.js"
 import { UsersController } from "../controllers/users.js";
 
+
 const router = express.Router();
-const usersController = new UsersController();
+const usersRepository = new UsersRepository(prisma);
+const usersService = new UsersService(usersRepository);
+const usersController = new UsersController(usersService);
 
 /**
  * 회원가입 API - POST '/signup'

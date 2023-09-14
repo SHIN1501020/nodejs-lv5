@@ -1,4 +1,3 @@
-import { UsersRepository } from "../repositories/users.js";
 import { CustomError } from "../utils/errors/CustomError.js";
 import { Message } from "../constants/index.js";
 
@@ -6,7 +5,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export class UsersService {
-  usersRepository = new UsersRepository();
+  constructor(usersRepository){
+    this.usersRepository = usersRepository;
+  }
 
   createUser = async (nickname, password) => {
     const isExistUser = await this.usersRepository.findUser(nickname);

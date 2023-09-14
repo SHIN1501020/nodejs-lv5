@@ -1,11 +1,11 @@
-import { LikesRepository } from "../repositories/likes.js";
-import { PostsRepository } from "../repositories/posts.js";
 import { CustomError } from "../utils/errors/CustomError.js";
 import { Message } from "../constants/index.js";
 
 export class LikesService {
-  likesRepository = new LikesRepository();
-  postsRepository = new PostsRepository();
+  constructor(likesRepository, postsRepository){
+    this.likesRepository = likesRepository;
+    this.postsRepository = postsRepository;
+  }
 
   setLike = async (userId, postId) => {
     const post = await this.postsRepository.findPost(postId);

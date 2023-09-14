@@ -9,10 +9,19 @@
 import express from "express";
 import authMiddleware from "../middlewares/auth.js";
 
+import { prisma } from "../utils/prisma/index.js";
+import { LikesRepository } from "../repositories/likes.js";
+import { PostsRepository } from "../repositories/posts.js";
+import { LikesService } from "../services/likes.js";
 import { LikesController } from "../controllers/likes.js";
 
+
 const router = express.Router();
-const likesController = new LikesController();
+const likesRepository = new LikesRepository(prisma);
+const postsRepository = new PostsRepository(prisma);
+const likesService = new LikesService(likesRepository, postsRepository);
+const likesController = new LikesController(likesService);
+
 
 /**
  * 좋아요 API - POST '/posts/:postId/like'

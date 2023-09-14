@@ -1,9 +1,10 @@
 import { asyncHandler } from "../middlewares/asyncHandler.js";
-import { LikesService } from "../services/likes.js";
 import { Message } from "../constants/index.js";
 
 export class LikesController {
-  likesService = new LikesService();
+  constructor(likesService){
+    this.likesService = likesService;
+  }
 
   setLike = asyncHandler(async (req, res, next) => {
     const { userId } = req.user;

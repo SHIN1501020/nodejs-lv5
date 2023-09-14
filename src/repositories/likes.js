@@ -1,8 +1,10 @@
-import { prisma } from "../utils/prisma/index.js";
-
 export class LikesRepository {
+  constructor(prisma){
+    this.prisma = prisma;
+  }
+
   findLike = async (userId, postId) => {
-    return await prisma.likes.findFirst({
+    return await this.prisma.likes.findFirst({
       where: {
         UserId: userId,
         PostId: postId,
@@ -11,7 +13,7 @@ export class LikesRepository {
   };
 
   createLike = async (userId, postId) => {
-    return await prisma.likes.create({
+    return await this.prisma.likes.create({
       data: {
         UserId: userId,
         PostId: postId,
@@ -20,7 +22,7 @@ export class LikesRepository {
   };
 
   deleteLike = async (likeId, userId, postId) => {
-    return await prisma.likes.delete({
+    return await this.prisma.likes.delete({
       where: {
         likeId: likeId,
         UserId: userId,
@@ -30,7 +32,7 @@ export class LikesRepository {
   };
 
   findLikes = async (userId) => {
-    return await prisma.posts.findMany({
+    return await this.prisma.posts.findMany({
       where: {
         Likes: {
           some: {

@@ -14,14 +14,13 @@ import ValidSchema from "../utils/joi/index.js";
 import { prisma } from "../utils/prisma/index.js";
 import { CommentsRepository } from "../repositories/comments.js";
 import { PostsRepository } from "../repositories/posts.js";
-import { CommentsServices } from "../services/comments.js";
+import { CommentsService } from "../services/comments.js";
 import { CommentsController } from "../controllers/comments.js";
-
 
 const router = express.Router();
 const postsRepository = new PostsRepository(prisma);
 const commentsRepository = new CommentsRepository(prisma);
-const commentsServices = new CommentsServices(commentsRepository, postsRepository);
+const commentsServices = new CommentsService(commentsRepository, postsRepository);
 const commentsController = new CommentsController(commentsServices);
 
 /**

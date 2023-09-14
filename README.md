@@ -1,8 +1,5 @@
 # Node.js 주특기 주차 Lv.5 과제
 ###### Lv.4 과제에 Layered Architecture Pattern 적용
-#
----
-#
 
 ##### 요구 사항
 

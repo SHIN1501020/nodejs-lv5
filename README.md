@@ -4,7 +4,7 @@
 ##### 요구 사항
 
 - ✅필수 
--- ayered Architecture Patten으로 프로젝트 개선
+  - Layered Architecture Patten으로 프로젝트 개선
 
 - ❎ 선택
   - prisma Client를 **의존성 주입**(**D**ependency **I**njection)을 이용해 전달 받도록 개선

@@ -3,7 +3,7 @@ export class PostsRepository {
     this.prisma = prisma;
   }
   createPost = async (userId, title, content) => {
-    return await this.prisma.create({
+    return await this.prisma.posts.create({
       data: {
         UserId: userId,
         title,
@@ -13,7 +13,7 @@ export class PostsRepository {
   };
 
   findAllPosts = async () => {
-    return await this.prisma.findMany({
+    return await this.prisma.posts.findMany({
       orderBy: {
         createdAt: "desc",
       },

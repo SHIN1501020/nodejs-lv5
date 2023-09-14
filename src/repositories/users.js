@@ -4,13 +4,13 @@ export class UsersRepository {
   }
 
   findUser = async (nickname) => {
-    return await this.prisma.findFirst({
+    return await this.prisma.users.findFirst({
       where: { nickname },
     });
   };
 
   createUser = async (nickname, password) => {
-    return await this.prisma.create({
+    return await this.prisma.users.create({
       data: {
         nickname,
         password,

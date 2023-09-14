@@ -1,11 +1,11 @@
-import { CommentsRepository } from "../repositories/comments.js";
-import { PostsRepository } from "../repositories/posts.js";
 import { CustomError } from "../utils/errors/CustomError.js";
 import { Message } from "../constants/index.js";
 
 export class CommentsService {
-  commentsRepository = new CommentsRepository();
-  postsRepository = new PostsRepository();
+  constructor(commentsRepository, postsRepository){
+    this.commentsRepository = commentsRepository;
+    this.postsRepository = postsRepository;
+  }
 
   createComment = async (postId, userId, comment) => {
     const post = await this.postsRepository.findPost(postId);

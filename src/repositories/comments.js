@@ -1,8 +1,10 @@
-import { prisma } from "../utils/prisma/index.js";
-
 export class CommentsRepository {
+  constructor(prisma){
+    this.prisma = prisma
+  }
+  
   createComment = async (postId, userId, comment) => {
-    return await prisma.comments.create({
+    return await this.prisma.comments.create({
       data: {
         PostId: postId,
         UserId: userId,
@@ -12,7 +14,7 @@ export class CommentsRepository {
   };
 
   findComments = async (postId) => {
-    return await prisma.comments.findMany({
+    return await this.prisma.comments.findMany({
       where: {
         PostId: postId,
       },
@@ -35,7 +37,7 @@ export class CommentsRepository {
   };
 
   findComment = async (postId, commentId) => {
-    return await prisma.comments.findFirst({
+    return await this.prisma.comments.findFirst({
       where: {
         PostId: postId,
         commentId: commentId,
@@ -44,7 +46,7 @@ export class CommentsRepository {
   };
 
   updateComment = async (postId, commentId, userId, comment) => {
-    return await prisma.comments.update({
+    return await this.prisma.comments.update({
       data: { comment },
       where: {
         PostId: postId,
@@ -55,7 +57,7 @@ export class CommentsRepository {
   };
 
   deleteComment = async (postId, commentId, userId) => {
-    return await prisma.comments.delete({
+    return await this.prisma.comments.delete({
       where: {
         PostId: postId,
         UserId: userId,

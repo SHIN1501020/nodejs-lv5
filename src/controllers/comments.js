@@ -1,9 +1,7 @@
-import { asyncHandler } from "../middlewares/asyncHandler.js";
-import { CommentsService } from "../services/comments.js";
-import { Message } from "../constants/index.js";
-
 export class CommentsController {
-  commentsService = new CommentsService();
+  constructor(commentsService){
+    this.commentsService = commentsService;
+  }
 
   createComment = asyncHandler(async (req, res, next) => {
     const { postId } = req.params;

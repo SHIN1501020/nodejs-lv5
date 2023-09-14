@@ -11,10 +11,18 @@ import authMiddleware from "../middlewares/auth.js";
 import { validateBody } from "../middlewares/validation.js";
 import ValidSchema from "../utils/joi/index.js";
 
+import { prisma } from "../utils/prisma/index.js";
+import { CommentsRepository } from "../repositories/comments.js";
+import { PostsRepository } from "../repositories/posts.js";
+import { CommentsServices } from "../services/comments.js";
 import { CommentsController } from "../controllers/comments.js";
 
+
 const router = express.Router();
-const commentsController = new CommentsController();
+const postsRepository = new PostsRepository(prisma);
+const commentsRepository = new CommentsRepository(prisma);
+const commentsServices = new CommentsServices(commentsRepository, postsRepository);
+const commentsController = new CommentsController(commentsServices);
 
 /**
  * 댓글 생성 API - POST '/posts/:postId/comments'

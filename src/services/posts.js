@@ -1,9 +1,10 @@
-import { PostsRepository } from "../repositories/posts.js";
 import { CustomError } from "../utils/errors/CustomError.js";
 import { Message } from "../constants/index.js";
 
 export class PostsService {
-  postsRepository = new PostsRepository();
+  constructor(postsRepository){
+    this.postsRepository = postsRepository
+  }
 
   createPost = async (userId, title, content) => {
     return await this.postsRepository.createPost(userId, title, content);

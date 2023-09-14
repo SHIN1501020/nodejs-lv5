@@ -11,10 +11,17 @@ import authMiddleware from "../middlewares/auth.js";
 import { validateBody } from "../middlewares/validation.js";
 import ValidSchema from "../utils/joi/index.js";
 
+import { prisma } from "../utils/prisma/index.js";
+import { PostsRepository } from "../repositories/posts.js";
+import { PostsService } from "../services/posts.js";
 import { PostsController } from "../controllers/posts.js";
 
+
 const router = express.Router();
-const postsController = new PostsController();
+const postsRepository = new PostsRepository(prisma);
+const postsService = new PostsService(postsRepository);
+const postsController = new PostsController(postsService);
+
 /**
  * 게시글 생성 API - POST '/posts'
  */

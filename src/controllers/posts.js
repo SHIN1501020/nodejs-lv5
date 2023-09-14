@@ -1,9 +1,10 @@
 import { asyncHandler } from "../middlewares/asyncHandler.js";
-import { PostsService } from "../services/posts.js";
 import { Message } from "../constants/index.js";
 
 export class PostsController {
-  postsService = new PostsService();
+  constructor(postsService){
+    this.postsService = postsService
+  }
 
   createPost = asyncHandler(async (req, res, next) => {
     const { userId } = req.user;

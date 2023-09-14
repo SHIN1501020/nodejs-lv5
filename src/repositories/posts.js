@@ -1,8 +1,9 @@
-import { prisma } from "../utils/prisma/index.js";
-
 export class PostsRepository {
+  constructor(prisma){ // Prisma Client를 의존성 주입(DI)을 이용해 개선
+    this.prisma = prisma;
+  }
   createPost = async (userId, title, content) => {
-    return await prisma.posts.create({
+    return await this.prisma.create({
       data: {
         UserId: userId,
         title,
@@ -12,7 +13,7 @@ export class PostsRepository {
   };
 
   findAllPosts = async () => {
-    return await prisma.posts.findMany({
+    return await this.prisma.findMany({
       orderBy: {
         createdAt: "desc",
       },
@@ -37,7 +38,7 @@ export class PostsRepository {
   };
 
   findPostById = async (postId) => {
-    return await prisma.posts.findFirst({
+    return await this.prisma.posts.findFirst({
       where: { postId: postId },
       select: {
         postId: true,
@@ -62,7 +63,7 @@ export class PostsRepository {
 
   //* findUnique로 핃드 전체 조회
   findPost = async (postId) => {
-    return await prisma.posts.findUnique({
+    return await this.prisma.posts.findUnique({
       where: {
         postId: postId,
       },
@@ -70,7 +71,7 @@ export class PostsRepository {
   };
 
   updatePost = async (postId, title, content) => {
-    return await prisma.posts.update({
+    return await this.prisma.posts.update({
       data: {
         title,
         content,
@@ -82,7 +83,7 @@ export class PostsRepository {
   };
 
   deletePost = async (postId, title, content) => {
-    return await prisma.posts.delete({
+    return await this.prisma.posts.delete({
       where: {
         postId: postId,
       },
